@@ -14,6 +14,9 @@ class Levels(Base):
 
     courses = relationship("Courses", order_by="Courses.id", back_populates="level")
 
+    def __repr__(self):
+        return f"Level({self.id}, {self.name}, {self.description})"
+
 
 class Languages(Base):
     __tablename__ = "Languages"
@@ -23,6 +26,9 @@ class Languages(Base):
 
     courses = relationship("Courses", order_by="Courses.id", back_populates="language")
 
+    def __repr__(self):
+        return f"Language(id: {self.id}, name: {self.name})"
+
 
 class Categories(Base):
     __tablename__ = "Categories"
@@ -31,6 +37,9 @@ class Categories(Base):
     name = Column(String(30))
 
     courses = relationship("Courses", order_by="Courses.id", back_populates="category")
+
+    def __repr__(self):
+        return f"Category(id: {self.id}, name: {self.name})"
 
 
 class Courses(Base):
@@ -49,3 +58,21 @@ class Courses(Base):
     level = relationship(Levels, back_populates="courses")
     language = relationship(Languages, back_populates="courses")
     category = relationship(Categories, back_populates="courses")
+
+    def __repr__(self):
+        return f"Course(" \
+               f"id: {self.id}, " \
+               f"lessons: {self.lessons}, " \
+               f"description: {self.description}, " \
+               f"start date: {self.start_date}, " \
+               f"end date: {self.end_date}, " \
+               f"price: {self.price}" \
+               f")"
+
+
+class LanguagesLimits(Base):
+    __tablename__ = "LanguagesLimits"
+
+    id = Column(Integer, primary_key=True)
+    language_id = Column(Integer, ForeignKey(Languages.id))
+    level_id = Column(Integer, ForeignKey(Levels.id))
