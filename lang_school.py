@@ -122,9 +122,24 @@ class LanguageSchool(AbsLanguageSchool):
         pass
 
     def levels(self, filter: str = '') -> List[Levels]:
-        if filter != '':
-            pass
-        return self.session.query(Levels).all()
+        if filter == '':
+            return self.session.query(Levels).all()
+        return self.session.query(Categories).filter_by(str).all()
+
+    def languages(self, filter: str = '') -> List[Languages]:
+        if filter == '':
+            return self.session.query(Languages).all()
+        return self.session.query(Categories).filter_by(str).all()
+
+    def categories(self, filter: str = '') -> List[Categories]:
+        if filter == '':
+            return self.session.query(Categories).all()
+        return self.session.query(Categories).filter_by(str).all()
+
+    def courses(self, filter: str = '') -> List[Courses]:
+        if filter == '':
+            return self.session.query(Courses).all()
+        return self.session.query(Courses).filter_by(str).all()
 
 
 if __name__ == '__main__':
