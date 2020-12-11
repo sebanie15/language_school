@@ -4,7 +4,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication
 
 from gui import main_window
-from lang_school import LanguageSchool
+from lang_school.lang_school import LanguageSchool
 
 
 class LanguageSchoolApp(QtWidgets.QMainWindow, main_window.Ui_MainWindow):
