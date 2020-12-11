@@ -2,13 +2,21 @@
 
 from setuptools import setup, find_packages
 
-with open('README.rst') as readme_file:
-    readme = readme_file.read()
 
-with open('HISTORY.rst') as history_file:
-    history = history_file.read()
+def read_readme():
+    with open('README.rst') as readme_file:
+        return readme_file.read()
 
-requirements = ['Click>=7.0', ]
+
+def read_history():
+    with open('HISTORY.rst') as history_file:
+        return history_file.read()
+
+
+def read_requirements():
+    with open('requirements.txt') as req:
+        return req.read().split('\n')
+
 
 setup_requirements = ['pytest-runner', ]
 
@@ -32,12 +40,12 @@ setup(
     description="Python Boilerplate contains all the boilerplate you need to create a Python package.",
     entry_points={
         'console_scripts': [
-            'simple_clinic=simple_clinic.cli:cli',
+            'lang_school=lang_school.cli:cli',
         ],
     },
-    install_requires=requirements,
+    install_requires=read_requirements(),
     license="MIT license",
-    long_description=readme + '\n\n' + history,
+    long_description=read_readme() + '\n\n' + read_history(),
     include_package_data=True,
     keywords='lang_school',
     name='lang_school',
